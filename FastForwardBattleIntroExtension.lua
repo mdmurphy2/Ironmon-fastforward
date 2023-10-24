@@ -1,38 +1,48 @@
--- This is a template for a custom code extension for the Ironmon Tracker.
--- To use, first rename both this top-most function and the return value at the bottom: "CodeExtensionTemplate" -> "YourFileNameHere"
--- Then fill in each function you want to use with the code you want executed during Tracker runtime.
--- The name, author, and description attribute fields are used by the Tracker to identify this extension, please always include them.
--- You can safely remove unused functions; they won't be called.
-
 local function FastForwardBattleIntro()
-	local self = {}
+	local self = {
+		version = "1.1",
+		name = "Fast Forward Battle Intro",
+		author = "Subwild & UTDZac",
+		description = "Automatically speeds up the battle animation for a Pokémon or Trainer sliding in, and the player throwing out their Pokémon.",
+		url = nil, -- Remove or set to nil if no host website available for this extension
+	}
 
-	-- Define descriptive attributes of the custom extension that are displayed on the Tracker settings
-	self.name = "Fast Forward Battle Intro"
-	self.author = "Subwild"
-	self.description = "Fast forwards the sliding in and throwing pokemon animation"
-	self.version = "1.0"
-	self.url = nil -- Remove or set to nil if no host website available for this extension
-
-    
-    self.isFastForwarding = false;
-    -- Executed after a new battle begins (wild or trainer), and only once per battle
-	function self.afterBattleBegins()
-        self.isFastForwarding = true;
-		self.normalSpeed = client.getconfig().SpeedPercent;
+	function self.startFastForward()
 		Utils.tempDisableBizhawkSound()
-        client.speedmode(6400);
+		client.speedmode(6400) -- Max framerate
+		self.isFastForwarding = true
 	end
 
+	function self.endFastForward()
+		Utils.tempEnableBizhawkSound()
+		client.speedmode(self.normalSpeed)
+		self.isFastForwarding = false
+	end
 
-	-- Executed each frame of the game loop, after most data from game memory is read in but before any natural redraw events occur
-	-- CAUTION: Avoid code here if possible, as this can easily affect performance. Most Tracker updates occur at 30-frame intervals, some at 10-frame.
-	function self.afterEachFrame()
-		if  self.isFastForwarding and Memory.readdword(GameSettings.gBattleMainFunc) == GameSettings.HandleTurnActionSelectionState  then
-            client.speedmode(self.normalSpeed);
-			Utils.tempEnableBizhawkSound()
-            self.isFastForwarding = false;
-        end
+	function self.isFightMenuAvailable()
+		return Memory.readdword(GameSettings.gBattleMainFunc) == GameSettings.HandleTurnActionSelectionState
+	end
+
+	-- Executed only once: When the extension is enabled by the user, and/or when the Tracker first starts up, after it loads all other required files and code
+	function self.startup()
+		self.isFastForwarding = false
+		local bizhawkConfig = client.getconfig() or {}
+		self.normalSpeed = bizhawkConfig.SpeedPercent or 100
+	end
+
+	-- Executed after a new battle begins (wild or trainer), and only once per battle
+	function self.afterBattleBegins()
+		if not Main.IsOnBizhawk() then return end
+
+		local bizhawkConfig = client.getconfig() or {}
+		self.normalSpeed = bizhawkConfig.SpeedPercent or 100
+		self.startFastForward()
+	end
+
+	function self.afterBattleDataUpdate()
+		if self.isFastForwarding and self.isFightMenuAvailable() then
+			self.endFastForward()
+		end
 	end
 
 	return self

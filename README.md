@@ -10,12 +10,12 @@ It will speed up whenever you encounter a pokemon or trainer, and go back to nor
 
 Requirements
 
-- The [Ironmon-Tracker](https://github.com/besteon/Ironmon-Tracker/releases/latest) for gen 3 (v7.3.0 or higher)
+- The [Ironmon-Tracker](https://github.com/besteon/Ironmon-Tracker/releases/latest) for gen 3 (v8.3.6 or higher)
 - [Bizhawk emulator](https://github.com/TASEmulators/BizHawk/releases) (2.8 or higher)
 
 Installation
 
-- Download the FastForwardBattleIntroExtension.LUA file (not the source code)
+- Download the FastForwardBattleIntroExtension.LUA file from the [LATEST RELEASE](https://github.com/mdmurphy2/Ironmon-fastforward/releases/latest) (not the source code) 
 - Follow this tutorial [Extensions on Ironmon](https://github.com/besteon/Ironmon-Tracker/wiki/Tracker-Add-ons#custom-code-extensions)
 
 

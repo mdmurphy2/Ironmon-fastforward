@@ -8,7 +8,7 @@ local function FastForwardBattleIntro()
 	}
 
 	function self.checkForUpdates()
-		local versionCheckUrl = "https://api.github.com/repos/c/Ironmon-fastforward/releases/latest"
+		local versionCheckUrl = "https://api.github.com/repos/mdmurphy2/Ironmon-fastforward/releases/latest"
 		local versionResponsePattern = '"tag_name":%s+"%w+(%d+%.%d+)"' -- matches "1.0" in "tag_name": "v1.0"
 		local downloadUrl = "https://github.com/mdmurphy2/Ironmon-fastforward/releases/latest"
 

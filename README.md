@@ -16,6 +16,6 @@ Requirements
 Installation
 
 - Download the FastForwardBattleIntroExtension.LUA file (not the source code)
-- Follow this tutorial [Extensions on Ironmon])(https://github.com/besteon/Ironmon-Tracker/wiki/Tracker-Add-ons#custom-code-extensions)
+- Follow this tutorial [Extensions on Ironmon](https://github.com/besteon/Ironmon-Tracker/wiki/Tracker-Add-ons#custom-code-extensions)
 
 

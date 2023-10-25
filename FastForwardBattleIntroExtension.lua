@@ -1,11 +1,20 @@
 local function FastForwardBattleIntro()
 	local self = {
-		version = "1.1",
+		version = "1.2",
 		name = "Fast Forward Battle Intro",
 		author = "Subwild & UTDZac",
 		description = "Automatically speeds up the battle animation for a Pokémon or Trainer sliding in, and the player throwing out their Pokémon.",
-		url = nil, -- Remove or set to nil if no host website available for this extension
+		url = "https://github.com/mdmurphy2/Ironmon-fastforward", -- Remove or set to nil if no host website available for this extension
 	}
+
+	function self.checkForUpdates()
+		local versionCheckUrl = "https://api.github.com/repos/c/Ironmon-fastforward/releases/latest"
+		local versionResponsePattern = '"tag_name":%s+"%w+(%d+%.%d+)"' -- matches "1.0" in "tag_name": "v1.0"
+		local downloadUrl = "https://github.com/mdmurphy2/Ironmon-fastforward/releases/latest"
+
+		local isUpdateAvailable = Utils.checkForVersionUpdate(versionCheckUrl, self.version, versionResponsePattern, nil)
+		return isUpdateAvailable, downloadUrl
+	end
 
 	function self.startFastForward()
 		Utils.tempDisableBizhawkSound()

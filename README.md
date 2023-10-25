@@ -5,7 +5,12 @@ Fast Forward extension for Ironmon tracker for Pokemon Fire Red
 
 This simple extension fast forwards the battle animation.
 
-It will speed up whenever you encounter a pokemon or trainer, and go back to normal speed when the Fight/Run buttons are available
+It will speed up whenever you encounter a pokemon or trainer, and go back to normal speed when the Fight/Run buttons
+ are available
+
+
+![FastForwardIntroExtension](https://github.com/mdmurphy2/Ironmon-fastforward/assets/43936034/919d9be7-aaf1-4502-bb0c-049e7d5e98c3)
+
 
 
 Requirements
